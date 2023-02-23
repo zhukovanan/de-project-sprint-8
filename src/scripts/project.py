@@ -89,7 +89,7 @@ filtered_read_stream_df = (restaurant_read_stream_df
           .withColumn('value', col('value').cast(StringType()))
           .withColumn('data', from_json(col('value'), incoming_message_schema ))
           .selectExpr('data.*')
-          .filter((col('datetime_created')>= col('adv_campaign_datetime_start'))&(col('datetime_created')<col('adv_campaign_datetime_end')))
+          .filter((lit(datetime.now())>= col('adv_campaign_datetime_start'))&(lit(datetime.now())<col('adv_campaign_datetime_end')))
           )
 
 # вычитываем всех пользователей с подпиской на рестораны
